@@ -44,9 +44,10 @@ const resolvers = {
     },
 
     saveBook: async (parent, { input }, context) => {
+      console.log(context.user)
       if (context.user) {
         const updateUser = User.findOneAndUpdate(
-          { id: context.user.id },
+          { _id: context.user._id },
           { $addToSet: { savedBooks: input } },
           { new: true, runValidators: true }
         );
