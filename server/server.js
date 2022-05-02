@@ -10,13 +10,14 @@ const { typeDefs, resolvers } = require('./schemas');
 const path = require('path');
 const db = require('./config/connection');
 
-const app = express();
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: authMiddleware,
+  // context: authMiddleware,
 });
+
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
