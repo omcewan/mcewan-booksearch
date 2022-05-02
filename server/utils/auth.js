@@ -27,6 +27,7 @@ module.exports = {
     } catch {
       console.log('Invalid token');
     }
+    return req
   },
 
   signToken: function ({ username, email, _id }) {
