@@ -7,6 +7,8 @@ const resolvers = {
       return User.find()
     }
 
+    // get single user
+
   }
 }
 
