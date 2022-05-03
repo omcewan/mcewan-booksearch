@@ -6,14 +6,14 @@ const resolvers = {
   Query: {
     // get all users
     users: async () => {
-      return User.find();
+      return User.find().select('-__v -password').populate('savedBooks');
     },
 
     me: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
-          '-__v -password'
-        );
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('savedBooks');
         return userData;
       }
 
@@ -49,7 +49,9 @@ const resolvers = {
           { _id: context.user._id },
           { $addToSet: { savedBooks: input } },
           { new: true, runValidators: true }
-        );
+        )
+          .select('-__v -password')
+          .populate('savedBooks');
 
         return updateUser;
       }
@@ -63,7 +65,9 @@ const resolvers = {
           { _id: context.user._id },
           { $pull: { savedBooks: { bookId: bookId } } },
           { new: true }
-        );
+        )
+          .select('-__v -password')
+          .populate('savedBooks');
 
         return updateUser;
       }
