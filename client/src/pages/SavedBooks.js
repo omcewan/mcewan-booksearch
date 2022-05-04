@@ -28,7 +28,7 @@ const SavedBooks = () => {
     try {
       const { data } = await removeBook({ variables: { bookId: bookId } });
       removeBookId(bookId);
-      window.location.reload(false);
+      // window.location.reload(false);
     } catch (err) {
       console.error(err);
     }
